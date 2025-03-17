@@ -1,0 +1,39 @@
+# IntelliJ IDEA 核心配置
+/.idea/
+*.iml
+*.ipr
+*.iws
+
+# IDEA 模块和缓存文件
+/modules.xml
+/workspace.xml
+/dictionaries/
+/shelf/
+/tasks.xml
+/vcs.xml
+/dataSources.xml
+/dataSources.local.xml
+/dataSources.ids
+/sqlDataSources.xml
+/dynamic.xml
+/uiDesigner.xml
+/assetWizardSettings.xml
+
+# 运行/调试配置
+/runConfigurations/
+
+# 插件生成文件
+/*.eml
+/render.experimental.xml
+
+# 代码检查缓存
+/.idea/inspectionProfiles/
+/*_profiles.xml
+
+# 版本控制忽略（IDEA自带）
+/.idea/vcs.xml
+
+# 用户特定文件（建议每个开发者本地保留）
+/.idea/usage.statistics.xml
+/.idea/caches/
+/.idea/.gitignore
