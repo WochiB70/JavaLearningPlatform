@@ -1,4 +1,4 @@
-package xyz.wochib70.example.entity;
+package xyz.wochib70.mybatis.basic.entity;
 
 import lombok.Builder;
 import lombok.Data;
