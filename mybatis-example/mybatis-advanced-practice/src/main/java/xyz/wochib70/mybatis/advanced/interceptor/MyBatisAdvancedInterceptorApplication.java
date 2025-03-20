@@ -28,10 +28,10 @@ public class MyBatisAdvancedInterceptorApplication {
             AdvancedInterceptorDao mapper = sqlSession.getMapper(AdvancedInterceptorDao.class);
             Random idGenerator = new Random();
             long id1 = idGenerator.nextLong(1111111111L, 9999999999L);
-            long id2 = 13212355333L;
+            long id2 = idGenerator.nextLong(1111111111L, 9999999999L);
             AdvancedInterceptorEntity entity1 = AdvancedInterceptorEntity.builder()
                     .id(id1)
-                    .name("测试" + id2 + "用例1")
+                    .name("测试【占位符】用例1")
                     .description("测试用例1")
                     .build();
             AdvancedInterceptorEntity entity2 = AdvancedInterceptorEntity.builder()
@@ -42,7 +42,7 @@ public class MyBatisAdvancedInterceptorApplication {
             mapper.insert(entity1);
             mapper.insert(entity2);
             AdvancedInterceptorEntity byId = mapper.findById(id2);
-            LOGGER.info("查询的时Id为{}， 结果的id为：{}", id2, byId.getId());
+            LOGGER.info("查询的时Id为{}， 结果的id为：{}，结果为：{}", id2, byId.getId(), byId);
         }
 
     }
