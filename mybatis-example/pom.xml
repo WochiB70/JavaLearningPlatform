@@ -5,6 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>xyz.wochib70</groupId>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>mybatis-advanced-practice</module>
+    </modules>
     <artifactId>mybatis-example</artifactId>
 
     <properties>

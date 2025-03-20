@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wochib70.mybatis.advanced.interceptor.dao.AdvancedInterceptorDao">
+
+    <insert id="insert">
+        INSERT INTO advanced_interceptor (id, name, description)
+        VALUES (#{id}, #{name}, #{description})
+    </insert>
+    <select id="findById"
+            resultType="xyz.wochib70.mybatis.advanced.interceptor.entity.AdvancedInterceptorEntity">
+        SELECT *
+        FROM advanced_interceptor
+        WHERE id = #{id}
+    </select>
+</mapper>
