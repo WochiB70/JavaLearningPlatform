@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wochib70.mybatis.advanced.cache.dao.AdvancedCacheDao">
+
+    <cache type="xyz.wochib70.mybatis.advanced.cache.cache.HashMapCache"/>
+
+    <insert id="insert">
+        INSERT INTO advanced_cache (id, name, description)
+        VALUES (#{id}, #{name}, #{description})
+    </insert>
+
+    <select id="selectListByLikeName" resultType="xyz.wochib70.mybatis.advanced.cache.entity.CacheEntity">
+
+        SELECT *
+        FROM advanced_cache
+        WHERE name LIKE CONCAT('%', #{name}, '%')
+    </select>
+
+</mapper>
