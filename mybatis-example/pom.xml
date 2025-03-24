@@ -7,6 +7,9 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>mybatis-advanced-practice</module>
+        <module>mybatis-springboot-integration</module>
+        <module>mybatis-basic-example</module>
+        <module>mybatis-spring-integration</module>
     </modules>
     <artifactId>mybatis-example</artifactId>
 
@@ -14,6 +17,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <mybatis.version>3.5.17</mybatis.version>
     </properties>
     <packaging>pom</packaging>
 
