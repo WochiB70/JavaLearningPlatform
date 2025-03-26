@@ -1,7 +1,7 @@
 package xyz.wochib70.mybatis.spring;
 
 
-import com.alibaba.druid.pool.DruidDataSource;
+import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.SpringProperties;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
 
@@ -20,11 +21,11 @@ public class SpringApplicationConfiguration {
 
     @Bean
     public DataSource dataSource() {
-        DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUrl(SpringProperties.getProperty("jdbc.url"));
-        dataSource.setDriverClassName(SpringProperties.getProperty("jdbc.driver"));
-        dataSource.setUsername(SpringProperties.getProperty("jdbc.username"));
-        dataSource.setPassword(SpringProperties.getProperty("jdbc.password"));
+        HikariDataSource dataSource = new HikariDataSource();
+        dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/mybatis-example?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC");
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUsername("root");
+        dataSource.setPassword("123456");
         return dataSource;
     }
 
@@ -39,6 +40,7 @@ public class SpringApplicationConfiguration {
     public SqlSessionFactory sqlSessionFactoryBean(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
+        sqlSessionFactoryBean.setConfigLocation(new PathMatchingResourcePatternResolver().getResource("classpath:mybatis-configuration.xml"));
         return  sqlSessionFactoryBean.getObject();
     }
 

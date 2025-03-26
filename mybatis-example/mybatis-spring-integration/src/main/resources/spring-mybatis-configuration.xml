@@ -13,11 +13,11 @@
 <!--    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">-->
 <!--    </bean>-->
     <!-- 配置Druid数据源的Bean -->
-    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-        <property name="driverClassName" value="${jdbc.driver}"/>
-        <property name="url" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/mybatis-example?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=UTC"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
     </bean>
 
 
@@ -31,8 +31,8 @@
 
     <!-- 配置mapper接口的扫描器，将Mapper接口的实现类自动注入到IoC容器中
      实现类Bean的名称默认为接口类名的首字母小写 -->
-    <!--    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
-    <!--        &lt;!&ndash; basePackage属性指定自动扫描mapper接口所在的包 &ndash;&gt;-->
-    <!--        <property name="basePackage" value="com.tjise.mapper"/>-->
-    <!--    </bean>-->
+        <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+            <!-- basePackage属性指定自动扫描mapper接口所在的包 -->
+            <property name="basePackage" value="xyz.wochib70.mybatis.spring.dao"/>
+        </bean>
 </beans>

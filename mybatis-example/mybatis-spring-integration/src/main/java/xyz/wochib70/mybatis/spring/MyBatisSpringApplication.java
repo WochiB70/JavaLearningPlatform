@@ -1,5 +1,7 @@
 package xyz.wochib70.mybatis.spring;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -14,9 +16,9 @@ public class MyBatisSpringApplication {
 
 
     public static void main(String[] args) {
+//        ApplicationContext context = new ClassPathXmlApplicationContext("spring-mybatis-configuration.xml");
         ApplicationContext context = new AnnotationConfigApplicationContext(SpringApplicationConfiguration.class);
-        SqlSessionTemplate template = context.getBean(SqlSessionTemplate.class);
-        ExampleDao mapper = template.getMapper(ExampleDao.class);
+        ExampleDao mapper = context.getBean(ExampleDao.class);
         long id = new Random().nextLong(1231L, 8456456456465L);
         ExampleEntity entity = ExampleEntity.builder()
                 .id(id)

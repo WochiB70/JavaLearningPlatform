@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wochib70.mybatis.spring.dao.ExampleDao">
+    <insert id="insert" keyColumn="id" keyProperty="id">
+        INSERT INTO example (id, name, description)
+        VALUES (#{id}, #{name}, #{description})
+    </insert>
+
+
+    <select id="findByIdAndTableName" resultType="xyz.wochib70.mybatis.spring.entity.ExampleEntity">
+        SELECT *
+        FROM ${tableName}
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+        </where>
+        <choose>
+            <when test="id != null">
+                LIMIT 1
+            </when>
+            <when test="id == null">
+                ORDER BY id ASC
+            </when>
+            <otherwise>
+                ORDER BY id DESC
+            </otherwise>
+        </choose>
+    </select>
+    <select id="findById" resultType="xyz.wochib70.mybatis.spring.entity.ExampleEntity">
+        SELECT *
+        FROM example
+        WHERE id = #{id}
+    </select>
+</mapper>
