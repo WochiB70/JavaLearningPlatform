@@ -1,14 +1,14 @@
 package xyyz.wochib70.mybatis.integration.mapper;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+import xyyz.wochib70.mybatis.integration.cache.HashMapCache;
 import xyyz.wochib70.mybatis.integration.entity.ExampleEntity;
 
 @Mapper
+@CacheNamespace(implementation = HashMapCache.class)
 public interface ExampleMapper {
 
+    @Options(useCache = false)
     @Insert("""
             INSERT INTO example VALUES (#{id}, #{name}, #{description});
             """)
