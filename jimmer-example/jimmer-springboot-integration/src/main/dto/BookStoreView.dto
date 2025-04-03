@@ -1,0 +1,13 @@
+export xyz.wochib70.jimmer.integration.springboot.entity.BookStore
+    -> package xyz.wochib70.jimmer.integration.springboot.dto
+
+
+BookStoreView {
+    #allScalars(this)
+    books {
+        #allScalars(this)
+        authors {
+            #allScalars(this)
+        }
+    }
+}

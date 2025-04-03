@@ -1,0 +1,10 @@
+export xyz.wochib70.jimmer.integration.springboot.entity.Book
+    -> package xyz.wochib70.jimmer.integration.springboot.dto
+
+
+BookView {
+    #allScalars(this)
+    authors {
+        #allScalars(this)
+    }
+}

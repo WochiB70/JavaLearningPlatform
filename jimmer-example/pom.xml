@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>xyz.wochib70</groupId>
+    <artifactId>jimmer-example</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>jimmer-basic-example</module>
+        <module>jimmer-springboot-integration</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jimmer.version>0.9.69</jimmer.version>
+        <springboot.version>3.4.3</springboot.version>
+        <mysql.version>8.0.28</mysql.version>
+    </properties>
+    <packaging>pom</packaging>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jdbc</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.babyfish.jimmer</groupId>
+                <artifactId>jimmer-spring-boot-starter</artifactId>
+                <version>${jimmer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.babyfish.jimmer</groupId>
+                <artifactId>jimmer-core</artifactId>
+                <version>${jimmer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.babyfish.jimmer</groupId>
+                <artifactId>jimmer-sql</artifactId>
+                <version>${jimmer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.babyfish.jimmer</groupId>
+                <artifactId>jimmer-client</artifactId>
+                <version>${jimmer.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
