@@ -1,0 +1,22 @@
+server:
+  port: 6061
+
+seata:
+  application-id: ${spring.application.name:}
+  tx-service-group: default_tx_group
+  service:
+    vgroup-mapping:
+      default_tx_group: default
+    grouplist:
+      default: 127.0.0.1:8091
+  registry:
+    type: file
+  data-source-proxy-mode: AT
+spring:
+  application:
+    name: seata-at-provider-one-example
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/seata?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
