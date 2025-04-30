@@ -62,7 +62,9 @@ public SpringApplication(ResourceLoader resourceLoader, Class<?>... primarySourc
 
 >
 > `BootstrapRegistryInitializer` 是一个配置器，用于配置SpringBoot的引导注册器。
+>
 > `ApplicationContextInitializer` 是一个初始化器，用于初始化 `ApplicationContext` 容器。
+>
 > `ApplicationListener` 是容器的监听器，用于监听特定的容器事件。
 >
 
