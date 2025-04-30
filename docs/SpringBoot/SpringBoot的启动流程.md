@@ -249,8 +249,11 @@ private <T> T getFromSpringFactories(WebApplicationType webApplicationType,
 
 >
 > 目前存在着以下三种 ApplicationContextFatory 实现类：
+>
 > `DefaultApplicationContextFactory` 对应 None。
+>
 > `ReactiveWebServerApplicationContextFactory` 对应 Reactive。
+>
 > `ServletWebServerApplicationContextFactory` 对应 Servlet。
 
 ## prepareContext 预处理 Spring 容器
