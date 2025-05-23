@@ -1,9 +1,11 @@
 package xyz.wochib70.exam.common;
 
+import java.time.LocalDateTime;
+
 public interface AggregateEvent {
 
-    void createTime();
+    LocalDateTime createTime();
 
-    void eventId();
+    String eventId();
 
 }
