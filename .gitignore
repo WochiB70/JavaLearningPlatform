@@ -37,3 +37,13 @@
 /.idea/usage.statistics.xml
 /.idea/caches/
 /.idea/.gitignore
+
+# Java 编译器输出
+**/out/
+# Gradle 构建输出
+**/build/
+# Maven 构建输出
+**/target/
+# macOS 生成的文件
+**/.DS_Store
+# Windows 生成的文件
