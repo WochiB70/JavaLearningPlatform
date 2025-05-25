@@ -1,6 +1,7 @@
 package xyyz.wochib70.mybatis.integration;
 
 
+import jdk.jfr.Event;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.cache.Cache;
 import org.apache.ibatis.cache.decorators.LoggingCache;
@@ -17,10 +18,7 @@ import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 import xyyz.wochib70.mybatis.integration.cache.HashMapCache;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Slf4j
 @Component
@@ -63,4 +61,49 @@ public class MyBatisCachePostProcessor implements BeanPostProcessor, Application
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
     }
+
+    public enum ResourceType {
+        CACHE,
+        MAPPER,
+        SQL_SESSION_FACTORY,
+        SQL_SESSION_TEMPLATE,
+        SQL_SESSION_TEMPLATE_FACTORY,
+        TRANSACTION_MAN
+    }
+
+    public interface Resource<T extends ResourceType> {
+        default Integer getResourceCount() {
+            throw new UnsupportedOperationException();
+        }
+
+        default T getResourceType() {
+            throw new UnsupportedOperationException();
+        }
+    }
+
+    public interface UsedResourceEvent<T extends Collection<? extends Resource>> {
+
+        default Collection<? extends Resource> getUsedResources() {
+            throw new UnsupportedOperationException();
+        }
+    }
+
+    public class UsedResourceEventImpl<T extends Collection<? extends Resource>> implements UsedResourceEvent<T> {
+
+        private final T usedResources;
+
+        public UsedResourceEventImpl(T usedResources) {
+            this.usedResources = usedResources;
+        }
+
+        @Override
+        public Collection<? extends Resource> getUsedResources() {
+            for (Resource resource : usedResources) {
+                ResourceType resourceType = resource.getResourceType();
+                Integer resourceCount = resource.getResourceCount();
+            }
+            return usedResources;
+        }
+    }
+
 }
