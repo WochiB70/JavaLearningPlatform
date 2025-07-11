@@ -1,31 +1,22 @@
-package xyz.wochib70.exam.domain.question.support;
+package xyz.wochib70.exam.domain.question.impl;
 
+import lombok.Setter;
+import xyz.wochib70.exam.domain.AbstratcAggregate;
 import xyz.wochib70.exam.domain.IdentifierId;
 import xyz.wochib70.exam.domain.question.CandidateAnswer;
 import xyz.wochib70.exam.domain.question.CandidateAnswerCapableQuestion;
-import xyz.wochib70.exam.domain.question.RenderType;
-import xyz.wochib70.exam.domain.question.ShelvesStatus;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class DefaultCandidateAnswerCapableQuestion extends AbstractQuestionAggregate implements CandidateAnswerCapableQuestion {
+public class DefaultCandidateAnswerCapableQuestion extends AbstratcAggregate implements CandidateAnswerCapableQuestion {
 
+    @Setter
     private Collection<CandidateAnswer> answers;
 
-    public DefaultCandidateAnswerCapableQuestion(IdentifierId identifierId, RenderType renderType) {
-        super(identifierId, renderType);
-        this.answers = new ArrayList<>();
+    public DefaultCandidateAnswerCapableQuestion(IdentifierId identifierId) {
+        super(identifierId);
     }
-
-    public DefaultCandidateAnswerCapableQuestion(IdentifierId identifierId,
-                                                 RenderType renderType,
-                                                 ShelvesStatus shelvesStatus,
-                                                 Collection<CandidateAnswer> candidateAnswers) {
-        super(identifierId, renderType, shelvesStatus);
-        this.answers = new ArrayList<>(candidateAnswers);
-    }
-
 
     @Override
     public Collection<CandidateAnswer> getCandidateAnswers() {
@@ -34,7 +25,6 @@ public class DefaultCandidateAnswerCapableQuestion extends AbstractQuestionAggre
 
     @Override
     public void updateCandidateAnswers(Collection<CandidateAnswer> candidateAnswers) {
-        checkModify();
         if (candidateAnswers == null || candidateAnswers.isEmpty()) {
             answers = new ArrayList<>();
             return;
@@ -45,7 +35,6 @@ public class DefaultCandidateAnswerCapableQuestion extends AbstractQuestionAggre
 
     @Override
     public void addCandidateAnswer(CandidateAnswer... candidateAnswer) {
-        checkModify();
         List<CandidateAnswer> toAddAnswers = candidateAnswer != null ? List.of(candidateAnswer) : Collections.emptyList();
         ArrayList<CandidateAnswer> newAnswers = new ArrayList<>(this.answers);
         newAnswers.addAll(toAddAnswers);
@@ -55,15 +44,9 @@ public class DefaultCandidateAnswerCapableQuestion extends AbstractQuestionAggre
 
     @Override
     public void removeCandidateAnswer(CandidateAnswer... candidateAnswer) {
-        checkModify();
         List<CandidateAnswer> toDeleteAnswers = candidateAnswer != null ? List.of(candidateAnswer) : Collections.emptyList();
         Set<String> toDeleteIdentifierSet = toDeleteAnswers.stream().map(CandidateAnswer::identifier).collect(Collectors.toSet());
         this.answers.removeIf(answer -> toDeleteIdentifierSet.contains(answer.identifier()));
-    }
-
-    @Override
-    protected void validate() {
-        throw new UnsupportedOperationException("能力提供类中不支持");
     }
 
     private void checkCandidateAnswersUnique(Collection<CandidateAnswer> candidateAnswers) {

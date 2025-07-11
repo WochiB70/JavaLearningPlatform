@@ -16,6 +16,7 @@ import xyz.woochib70.spring.boot.example.transaction.mapper.TransactionMapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 

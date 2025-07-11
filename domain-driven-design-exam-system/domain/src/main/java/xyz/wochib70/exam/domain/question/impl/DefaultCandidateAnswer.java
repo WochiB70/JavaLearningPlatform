@@ -1,4 +1,4 @@
-package xyz.wochib70.exam.domain.question.support;
+package xyz.wochib70.exam.domain.question.impl;
 
 import xyz.wochib70.exam.domain.question.CandidateAnswer;
 

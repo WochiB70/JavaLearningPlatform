@@ -6,6 +6,9 @@ public interface AggregateEvent {
 
     LocalDateTime createTime();
 
-    String eventId();
+    IdentifierId eventId();
 
+    Class<? extends AggregateEvent> eventClass();
+
+    Class<? extends Aggregate> aggregateClass();
 }

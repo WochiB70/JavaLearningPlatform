@@ -17,7 +17,7 @@ public abstract class AbstratcAggregate implements Aggregate {
     }
 
     @Override
-    public IdentifierId identiferId() {
+    public IdentifierId identifierId() {
         return identifierId;
     }
 
@@ -26,8 +26,7 @@ public abstract class AbstratcAggregate implements Aggregate {
         return Collections.unmodifiableCollection(events);
     }
 
-    @Override
-    public void publishEvent(AggregateEvent event) {
+    protected void publishEvent(AggregateEvent event) {
         events.addLast(event);
     }
 

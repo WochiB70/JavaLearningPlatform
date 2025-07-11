@@ -4,12 +4,20 @@ import java.time.LocalDateTime;
 
 public abstract class AbstractAggregateEvent implements AggregateEvent {
 
-    private final String aggregateId;
+    private final IdentifierId eventId;
 
     private final LocalDateTime createTime;
 
-    public AbstractAggregateEvent(String aggregateId) {
-        this.aggregateId = aggregateId;
+    private final Class<? extends Aggregate> aggregateClass;
+
+    private final Class<? extends AggregateEvent> eventClass;
+
+    public AbstractAggregateEvent(
+            Class<? extends Aggregate> aggregateClass
+    ) {
+        this.eventId = DomainIdRegistry.nextEventId();
+        this.aggregateClass = aggregateClass;
+        this.eventClass = this.getClass();
         this.createTime = LocalDateTime.now();
     }
 
@@ -19,7 +27,17 @@ public abstract class AbstractAggregateEvent implements AggregateEvent {
     }
 
     @Override
-    public String eventId() {
-        return aggregateId;
+    public IdentifierId eventId() {
+        return eventId;
+    }
+
+    @Override
+    public Class<? extends Aggregate> aggregateClass() {
+        return aggregateClass;
+    }
+
+    @Override
+    public Class<? extends AggregateEvent> eventClass() {
+        return eventClass;
     }
 }

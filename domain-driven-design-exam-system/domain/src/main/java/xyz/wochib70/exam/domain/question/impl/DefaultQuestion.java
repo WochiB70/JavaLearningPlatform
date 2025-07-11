@@ -1,5 +1,7 @@
-package xyz.wochib70.exam.domain.question.support;
+package xyz.wochib70.exam.domain.question.impl;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.util.Assert;
 import xyz.wochib70.exam.domain.AbstratcAggregate;
 import xyz.wochib70.exam.domain.IdentifierId;
@@ -8,7 +10,9 @@ import xyz.wochib70.exam.domain.question.QuestionAggregate;
 import xyz.wochib70.exam.domain.question.RenderType;
 import xyz.wochib70.exam.domain.question.ShelvesStatus;
 
-public abstract class AbstractQuestionAggregate extends AbstratcAggregate implements QuestionAggregate {
+@Getter
+@Setter
+public class DefaultQuestion extends AbstratcAggregate implements QuestionAggregate {
 
     private String question;
 
@@ -18,19 +22,8 @@ public abstract class AbstractQuestionAggregate extends AbstratcAggregate implem
 
     private ShelvesStatus shelvesStatus;
 
-
-    public AbstractQuestionAggregate(IdentifierId identifierId, RenderType renderType) {
+    public DefaultQuestion(IdentifierId identifierId) {
         super(identifierId);
-        Assert.notNull(renderType, "renderType must not be null");
-        this.shelvesStatus = ShelvesStatus.SHELVES_OFF;
-        this.renderType = renderType;
-    }
-
-    public AbstractQuestionAggregate(IdentifierId identifierId, RenderType renderType,ShelvesStatus shelvesStatus) {
-        super(identifierId);
-        Assert.notNull(renderType, "renderType must not be null");
-        this.shelvesStatus = shelvesStatus;
-        this.renderType = renderType;
     }
 
     @Override
@@ -40,7 +33,6 @@ public abstract class AbstractQuestionAggregate extends AbstratcAggregate implem
 
     @Override
     public void updateQuestion(String question) {
-        canModify();
         this.question = question;
     }
 
@@ -51,13 +43,11 @@ public abstract class AbstractQuestionAggregate extends AbstratcAggregate implem
 
     @Override
     public void updateScoreType(CalculateScoreType scoreType) {
-        canModify();
         this.calculateScoreType = scoreType;
     }
 
     @Override
     public void updateRenderType(RenderType renderType) {
-        canModify();
         Assert.notNull(renderType, "renderType must not be null");
         this.renderType = renderType;
     }
@@ -72,24 +62,15 @@ public abstract class AbstractQuestionAggregate extends AbstratcAggregate implem
         if (shelvesStatus == ShelvesStatus.SHELVES_ON) {
             throw new IllegalStateException("当前问题已被上架");
         }
-        this.validate();
         this.shelvesStatus = ShelvesStatus.SHELVES_ON;
     }
 
     @Override
     public void shelvesOff() {
+        if (shelvesStatus == ShelvesStatus.SHELVES_OFF) {
+            throw new IllegalStateException("当前问题已被下架");
+        }
         this.shelvesStatus = ShelvesStatus.SHELVES_OFF;
     }
 
-    protected boolean canModify() {
-        return this.shelvesStatus == ShelvesStatus.SHELVES_OFF;
-    }
-
-    protected void checkModify() {
-        if (!this.canModify()) {
-            throw new UnsupportedOperationException("当前问题不能被修改");
-        }
-    }
-
-    protected abstract void validate();
 }
